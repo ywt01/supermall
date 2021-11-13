@@ -8,6 +8,7 @@
         <home-swiper :banner="banner" class="home-swiper"/>
         <recommend-view :recommend="recommend" />
         <feature-view />
+        <tab-contro :title="['流行','新款','精选']" />
         <ul>
             <li>1</li>
             <li>2</li>
