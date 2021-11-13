@@ -34,11 +34,14 @@
 </template>
 
 <script>
-    import NavBar from '../../../common/NavBar/NarBar.vue'
+//  子组件
     import HomeSwiper from './childComps/HomeSwiper.vue'
     import RecommendView from './childComps/RecommendView.vue'
     import FeatureView from './childComps/FeatureView.vue'
-
+//  公共组件
+    import NavBar from '../../../common/NavBar/NarBar.vue'
+    import TabContro from '../../../common/TabContro/TabContro.vue'
+//  数据，功能组件
     import { getHomeMultdata } from '../../../../network/home.js'
     export default {
         name: 'Home',
@@ -51,10 +54,13 @@
             }
         },
         components: {
+            // 公共组件
             NavBar,
+            // 子组件
             HomeSwiper,
             RecommendView,
-            FeatureView
+            FeatureView,
+            TabContro
         },
         created() {
             getHomeMultdata()
