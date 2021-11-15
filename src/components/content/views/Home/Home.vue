@@ -6,7 +6,7 @@
             <template #right></template>
         </nav-bar>
         <home-swiper :banner="banner" class="home-swiper"/>
-        <recommend-view :recommend="recommend" />
+        <recommend-view />
         <feature-view />
         <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
         <goods-list :goods="goods" :type="type"/> 
@@ -28,10 +28,24 @@
         name: 'Home',
         data() {
             return {
-                banner: null,
+                banner: [{
+                    image:"https://s10.mogucdn.com/mlcdn/c45406/180926_45fkj8ifdj4l824l42dgf9hd0h495_750x390.jpg",
+                    link:'https://act.mogujie.com/huanxin0001?acm=3.mce.2_10_1jhwa.43542.0.ccy5br4OlfK0Q.pos_0-m_454801-sd_119'
+                },
+                {
+                    image:"https://s10.mogucdn.com/mlcdn/c45406/180926_31eb9h75jc217k7iej24i2dd0jba3_750x390.jpg",
+                    link:'https://act.mogujie.com/ruqiu00001?acm=3.mce.2_10_1ji16.43542.0.ccy5br4OlfK0R.pos_1-m_454889-sd_119'
+                },
+                {
+                    image:"https://s10.mogucdn.com/mlcdn/c45406/180919_3f62ijgkj656k2lj03dh0di4iflea_750x390.jpg",
+                    link:'https://act.mogujie.com/huanji001?acm=3.mce.2_10_1jfj8.43542.0.ccy5br4OlfK0S.pos_2-m_453270-sd_119'
+                },
+                {
+                    image:"https://s10.mogucdn.com/mlcdn/c45406/180917_18l981g6clk33fbl3833ja357aaa0_750x390.jpg",
+                    link:'https://act.mogujie.com/liuxing00001?acm=3.mce.2_10_1jepe.43542.0.ccy5br4OlfK0T.pos_3-m_452733-sd_119'
+                }],
                 dKeyword: null,
                 keywords: null,
-                recommend: null,
                 sorts: null,
                 goods:{
                     'pop':{page:0,list:[]},
@@ -52,20 +66,11 @@
             GoodsList
         },
         created() {
-            this.getHomeMultdata()
             this.getHomegoods('pop',0)
             this.getHomegoods('sell',0)
             this.getHomegoods('new',0)
         },
         methods: {
-            getHomeMultdata() {
-              getHomeMultdata()
-              .then(value => {
-                for(let k in value.data) {
-                    this[k] = value.data[k].list
-                }
-              })
-            },
             getHomegoods(type,page) {
               page+=1;
               getHomegoods(type,page)

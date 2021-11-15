@@ -84,7 +84,7 @@
                 },2000)
             },
         },
-        updated() {
+        mounted() {
             let box = document.querySelector('.box')
             let count = box.children.length
             let ol = document.querySelector('ol')
@@ -107,9 +107,7 @@
             })         
             box.addEventListener('touchend',function() {
                 _this.timer = _this.time()
-            })         
-        },
-        mounted() {
+            })      
             this.timer = this.time()
         },
         beforeUnmount() {
