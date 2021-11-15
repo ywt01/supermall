@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 const Home = () =>
   import ('../components/content/views/Home/Home.vue')
 const Categories = () =>
@@ -25,7 +25,7 @@ const routes = [{
 }, ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
   meta:{keepAlive:true}
 })

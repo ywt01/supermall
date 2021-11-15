@@ -73,7 +73,6 @@
                 this.sorts = value.result.filter.list
                 this.goods[type].list.push(...value.result.wall.list)
                 this.goods[type].page = value.result.wall.page
-                console.log(value.result);
               })
             },
             tabContro(sort) {
