@@ -100,7 +100,14 @@
             let imgClongFirst = box.children[0].cloneNode(true)
             let imgClongLast = box.children[box.children.length - 1].cloneNode(true)
             box.appendChild(imgClongFirst)
-            box.insertBefore(imgClongLast,box.children[0])         
+            box.insertBefore(imgClongLast,box.children[0])
+            box.addEventListener('touchstart',function() {
+                clearInterval(_this.timer)
+                _this.timer = null;
+            })         
+            box.addEventListener('touchend',function() {
+                _this.timer = _this.time()
+            })         
         },
         mounted() {
             this.timer = this.time()

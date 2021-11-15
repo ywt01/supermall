@@ -21,5 +21,6 @@
     justify-content: space-between;
     background-color: #f6f6f6;
     box-shadow: 0 -3px 10px rgb(68 68 68 / 20%);
+    z-index: 9;
   }
 </style>

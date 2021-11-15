@@ -8,29 +8,8 @@
         <home-swiper :banner="banner" class="home-swiper"/>
         <recommend-view :recommend="recommend" />
         <feature-view />
-        <tab-contro :title="['流行','新款','精选']" />
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
-            <li>11</li>
-            <li>12</li>
-            <li>13</li>
-            <li>14</li>
-            <li>15</li>
-            <li>16</li>
-            <li>17</li>
-            <li>18</li>
-            <li>19</li>
-            <li>20</li>
-        </ul>
+        <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
+        <goods-list :goods="goods" :type="type"/> 
     </div> 
 </template>
 
@@ -42,8 +21,9 @@
 //  公共组件
     import NavBar from '../../../common/NavBar/NarBar.vue'
     import TabContro from '../../../common/TabContro/TabContro.vue'
+    import GoodsList from '../../goods/GoodsList.vue'
 //  数据，功能组件
-    import { getHomeMultdata } from '../../../../network/home.js'
+    import { getHomeMultdata,getHomegoods } from '../../../../network/home.js'
     export default {
         name: 'Home',
         data() {
@@ -51,7 +31,14 @@
                 banner: null,
                 dKeyword: null,
                 keywords: null,
-                recommend: null
+                recommend: null,
+                sorts: null,
+                goods:{
+                    'pop':{page:0,list:[]},
+                    'sell':{page:0,list:[]},
+                    'new':{page:0,list:[]}
+                },
+                type:'pop'
             }
         },
         components: {
@@ -61,18 +48,37 @@
             HomeSwiper,
             RecommendView,
             FeatureView,
-            TabContro
+            TabContro,
+            GoodsList
         },
         created() {
-            getHomeMultdata()
-            .then(value => {
+            this.getHomeMultdata()
+            this.getHomegoods('pop',0)
+            this.getHomegoods('sell',0)
+            this.getHomegoods('new',0)
+        },
+        methods: {
+            getHomeMultdata() {
+              getHomeMultdata()
+              .then(value => {
                 for(let k in value.data) {
                     this[k] = value.data[k].list
                 }
-            })
-        },
-        methods: {
-            
+              })
+            },
+            getHomegoods(type,page) {
+              page+=1;
+              getHomegoods(type,page)
+              .then(value => {
+                this.sorts = value.result.filter.list
+                this.goods[type].list.push(...value.result.wall.list)
+                this.goods[type].page = value.result.wall.page
+                console.log(value.result);
+              })
+            },
+            tabContro(sort) {
+                this.type = sort
+            }
         },
         computed: {
             
