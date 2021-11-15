@@ -88,6 +88,7 @@
             let box = document.querySelector('.box')
             let count = box.children.length
             let ol = document.querySelector('ol')
+            ol.innerHTML = '';
             let _this = this;
             for(let i = 0;i < count;i++) {
                 var li = document.createElement('li')
