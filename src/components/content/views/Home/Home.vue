@@ -48,9 +48,9 @@
                 keywords: null,
                 sorts: null,
                 goods:{
-                    'pop':{page:0,list:[]},
-                    'sell':{page:0,list:[]},
-                    'new':{page:0,list:[]}
+                    'pop':{page:0,list:[],Top:0},
+                    'sell':{page:0,list:[],Top:640},
+                    'new':{page:0,list:[],Top:640}
                 },
                 type:'pop'
             }
@@ -69,6 +69,12 @@
             this.getHomegoods('pop',0)
             this.getHomegoods('sell',0)
             this.getHomegoods('new',0)
+            let that = this
+            document.addEventListener('scroll',function(e) {
+                if(e.target.documentElement.scrollHeight - e.target.documentElement.clientHeight===e.target.documentElement.scrollTop) {
+                    that.getHomegoods(that.type,that.goods[that.type].page)
+                }
+            })
         },
         methods: {
             getHomegoods(type,page) {
@@ -81,7 +87,9 @@
               })
             },
             tabContro(sort) {
+                this.goods[this.type].Top = window.scrollY
                 this.type = sort
+                window.scroll(0,this.goods[this.type].Top)
             }
         },
         computed: {

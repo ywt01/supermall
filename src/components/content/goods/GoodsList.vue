@@ -27,7 +27,7 @@
                 type:String,
                 default: 'pop'
             }
-        }
+        },
     }
 </script>
 
