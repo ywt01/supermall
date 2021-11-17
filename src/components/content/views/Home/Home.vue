@@ -71,7 +71,7 @@
             this.getHomegoods('new',0)
             let that = this
             document.addEventListener('scroll',function(e) {
-                if(e.target.documentElement.scrollHeight - e.target.documentElement.clientHeight===e.target.documentElement.scrollTop) {
+                if(document.documentElement.scrollHeight - document.documentElement.clientHeight  <= document.documentElement.scrollTop) {
                     that.getHomegoods(that.type,that.goods[that.type].page)
                 }
             })
