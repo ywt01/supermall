@@ -23,7 +23,7 @@
     import TabContro from '../../../common/TabContro/TabContro.vue'
     import GoodsList from '../../goods/GoodsList.vue'
 //  数据，功能组件
-    import { getHomeMultdata,getHomegoods } from '../../../../network/home.js'
+    import { getHomegoods } from '../../../../network/home.js'
     export default {
         name: 'Home',
         data() {
@@ -107,6 +107,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    max-width: 600px;
     z-index: 9;
 }
 .home-swiper {

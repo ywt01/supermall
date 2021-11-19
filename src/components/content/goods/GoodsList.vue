@@ -46,7 +46,7 @@
 }
 .goodLink {
     display: flex;
-    height: 340px;
+    min-height: 340px;
     flex-direction: column;
     justify-content: space-between;
 }

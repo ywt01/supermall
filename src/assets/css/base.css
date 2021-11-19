@@ -23,6 +23,8 @@ body {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   background: var(--color-backgroud);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 a {
