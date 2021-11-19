@@ -22,94 +22,116 @@
         },
         methods: {
             anima(index,target) {
-                this.flag = false
+                // 动画效果
                 let SwiperItem = document.querySelector('.SwiperItem')
+                let box = document.querySelector('.box')
                 let li = document.querySelector('ol').querySelectorAll('li');
-                if(index === li.length) {
-                    target.style.transition = 'none'
-                    target.style.left = 0
-                    index = 0
-                }
-                if(index === -1) {
-                    target.style.transition = 'none'
-                    index = li.length - 1
-                    target.style.left = - (index + 1) * SwiperItem.offsetWidth + 'px'
+                if(!target) {
+                    target = box
                 }
                 this.count = parseInt(index);
-                target.style.transition = 'all .5s'
-                target.style.left = - (index + 1) * SwiperItem.offsetWidth + 'px';
+                target.style.left = - (parseInt(index) + 1) * SwiperItem.offsetWidth + 'px';
                 for(var i = 0;i < li.length;i++) {
                     li[i].style.backgroundColor = '#fff';
                 }
-                li[index].style.backgroundColor = 'blue';
-                this.flag = true;
+                if(index === li.length) {
+                    li[0].style.backgroundColor = 'blue';
+                } else if(index === -1){
+                    li[li.length - 1].style.backgroundColor = 'blue';
+                } else {
+                    li[index].style.backgroundColor = 'blue';
+                }
             },
             btn(e) {
                 let index = e.target.getAttribute('index')
-                if(this.flag) {
-                    let box = document.querySelector('.box')
-                    this.anima(index,box)
+                let box = document.querySelector('.box')
+                box.style.transition = 'all .5s'
+                this.anima(index,box)
+                clearInterval(this.timer)
+                this.timer = null;
+                this.timer = this.time()
+            },
+            prev() {
+                // 上一张图片
+                let box = document.querySelector('.box')
+                let SwiperItem = document.querySelector('.SwiperItem')
+                let li = document.querySelector('ol').querySelectorAll('li');
+                if(this.count === -1) {
+                    box.style.transition = 'none'
+                    this.count = li.length - 1
+                    box.style.left = - (parseInt(this.count + 1)) * SwiperItem.offsetWidth + 'px'
+                    this.anima(this.count)
                 }
+                box.style.transition = 'all .5s'
+                this.anima(this.count-1)
+            },
+            next() {
+                // 下一张图片
+                let box = document.querySelector('.box')
+                let SwiperItem = document.querySelector('.SwiperItem')
+                let li = document.querySelector('ol').querySelectorAll('li');
+                if(this.count === li.length) {
+                    box.style.transition = 'none'
+                    box.style.left = - SwiperItem.offsetWidth + 'px'
+                    this.count = 0
+                    this.anima(this.count)
+                }
+                box.style.transition = 'all .5s'
+                this.anima(this.count+1)
             },
             move(e) {
+                clearInterval(this.timer)
+                this.timer = null;
                 let box = document.querySelector('.box')
-                let startX = e.changedTouches[0].pageX;
-                let offsetInit = box.offsetLeft
                 let that = this
-                let moveX = 0;
+                let startX = e.changedTouches[0].pageX,
+                    endX = 0,
+                    startOffsetLeft = box.offsetLeft,
+                    moveX = 0;
+                    // 手动滑动图片
                 box.addEventListener('touchmove',function(e) {
-                    let endX = e.changedTouches[0].pageX
+                    endX = e.changedTouches[0].pageX
                     moveX = endX - startX
-                    box.style.left = offsetInit + moveX + 'px'
+                    box.style.left = moveX + startOffsetLeft + 'px'
                 })
-                box.addEventListener('touchend',fn) 
-                function fn() {
-                    if(Math.abs(moveX) > 100) {
-                        if(moveX > 0) {
-                            that.anima(that.count-1,box);
+                function fn(e) {
+                    if(Math.abs(moveX) > 50) {
+                        if(moveX < 0) {
+                            that.next()
                         } else {
-                            that.anima(that.count+1,box);
+                            that.prev()
                         }
                     } else {
-                        that.anima(that.count,box);
+                        that.anima(that.count)
                     }
+                    that.timer = that.time()
                     box.removeEventListener('touchend',fn)
                 }
+                box.addEventListener('touchend',fn)
             },
             time() {
                 return setInterval(() => {
-                  let box = document.querySelector('.box')
-                  let i = this.count + 1
-                  this.anima(i,box)
+                    this.next()
                 },2000)
             },
         },
         mounted() {
-            let box = document.querySelector('.box')
-            let count = box.children.length
+            // 创建小圆点
             let ol = document.querySelector('ol')
-            ol.innerHTML = '';
-            let _this = this;
-            for(let i = 0;i < count;i++) {
-                var li = document.createElement('li')
+            let box = document.querySelector('.box')
+            for(let i = 0;i < box.children.length;i++) {
+                let li = document.createElement('li')
                 li.setAttribute('index',i)
-                li.addEventListener('click',function(e){
-                    _this.btn(e)
-                }) 
-                ol.append(li)
+                li.addEventListener('click',this.btn)
+                ol.appendChild(li)
             }
-            let imgClongFirst = box.children[0].cloneNode(true)
-            let imgClongLast = box.children[box.children.length - 1].cloneNode(true)
-            box.appendChild(imgClongFirst)
-            box.insertBefore(imgClongLast,box.children[0])
-            box.addEventListener('touchstart',function() {
-                clearInterval(_this.timer)
-                _this.timer = null;
-            })         
-            box.addEventListener('touchend',function() {
-                _this.timer = _this.time()
-            })      
-            this.timer = this.time()
+            // 克隆第一张图片和最后一张图片，无缝滚动
+            let firstImg = box.children[0].cloneNode(true)
+            let lastImg = box.children[box.children.length - 1].cloneNode(true)
+            box.appendChild(firstImg)
+            box.insertBefore(lastImg,box.firstChild)
+            // 开启定时器滚动图片
+            this.timer = this.time();
         },
         beforeUnmount() {
             clearInterval(this.timer)

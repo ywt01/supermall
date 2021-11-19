@@ -71,6 +71,7 @@
             this.getHomegoods('new',0)
             let that = this
             document.addEventListener('scroll',function(e) {
+                // pc端和 移动端 兼容
                 let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
                 let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
                 let scrollTop = document.documentElement.scrollTop|| document.body.scrollTop
