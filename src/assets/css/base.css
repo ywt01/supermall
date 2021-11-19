@@ -25,6 +25,7 @@ body {
   background: var(--color-backgroud);
   max-width: 600px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 a {

@@ -1,15 +1,15 @@
 <template>
     <div class="goodsList">
-        <div v-for="(item,index) in goods[type].list" :key="index">
-            <a :href="item.link" class="goodLink">
-                <img :src="item.show.img" alt="">
-                <p class="info">{{item.title}}</p>
-                <section class="goodsInfo">
-                    <span>{{item.price}}</span>
-                    <i class="icon">{{item.cfav}}</i>
-                </section>
-            </a>
-        </div>
+      <div v-for="(item,index) in goods[type].list" :key="index" class="content">
+          <a :href="item.link" class="goodLink">
+              <img :src="item.show.img" alt="">
+              <p class="info">{{item.title}}</p>
+              <section class="goodsInfo">
+                  <span>{{item.price}}</span>
+                  <i class="icon">{{item.cfav}}</i>
+              </section>
+          </a>
+      </div>
     </div>
 </template>
 
@@ -84,5 +84,4 @@
     margin-right: 8px;
     font-style: normal;
 }
-
 </style>

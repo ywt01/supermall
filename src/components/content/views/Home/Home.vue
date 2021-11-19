@@ -10,7 +10,7 @@
         <feature-view />
         <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
         <goods-list :goods="goods" :type="type"/> 
-    </div> 
+    </div>
 </template>
 
 <script>
@@ -52,7 +52,7 @@
                     'sell':{page:0,list:[],Top:640},
                     'new':{page:0,list:[],Top:640}
                 },
-                type:'pop'
+                type:'pop',
             }
         },
         components: {
@@ -98,7 +98,7 @@
         },
         computed: {
             
-        }
+        },
     }
 </script>
 
@@ -106,7 +106,7 @@
 .nav-bar {
     position: fixed;
     top: 0;
-    width: 100%;
+    min-width: 375px;
     max-width: 600px;
     z-index: 9;
 }
