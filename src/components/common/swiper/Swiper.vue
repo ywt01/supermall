@@ -118,6 +118,7 @@
         mounted() {
             // 创建小圆点
             let ol = document.querySelector('ol')
+            ol.innerHTML = ''
             let box = document.querySelector('.box')
             for(let i = 0;i < box.children.length;i++) {
                 let li = document.createElement('li')
