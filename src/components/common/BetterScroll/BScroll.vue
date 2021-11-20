@@ -17,7 +17,8 @@
         },
         mounted() {
             let BS = new BScroll(this.$refs.wrapper,{
-                click: true
+                click: true,
+                observeDOM: true
             })
             this.scroll = BS
         },

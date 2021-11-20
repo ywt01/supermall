@@ -106,8 +106,7 @@
                 window.scroll(0,this.goods[this.type].Top)
             },
             btnClick() {
-                console.log(1);
-                this.$refs.scroll.scrollTo(0,0,500)
+                this.$refs.scroll.scrollTo(0,0,1000)
             }
         },
         computed: {
