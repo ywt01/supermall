@@ -52,7 +52,7 @@
         methods: {
             scrollTo(x,y,time=300) {
                 this.scroll.scrollTo(x,y,time)
-            }
+            },
         }
     }
 </script>
@@ -60,5 +60,7 @@
 <style scoped>
 .wrapper {
     height: calc(100% - 93px);
+    overflow: hidden;
 }
+
 </style>

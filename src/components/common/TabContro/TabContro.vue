@@ -21,7 +21,7 @@
         methods:{
             curBtn(index) {
                 this.curIndex = index
-                this.$emit('tabContro',this.sorts[index].sort)
+                this.$emit('tabContro',this.sorts[index].sort,index)
             }
         },
         props:{
@@ -43,8 +43,6 @@
 
 <style scoped>
 .tabContro {
-    position: sticky;
-    top: 44px;
     display: flex;
     flex: 1;
     justify-content: space-around;

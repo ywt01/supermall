@@ -5,15 +5,16 @@
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
+        <tab-contro v-show="tabControIsShow" ref="tabContro1" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
         <scroll ref="scroll" 
         @upload='upload' 
         @block='block'
         :probeType='3'
         :pullUpLoad='true'>
-            <home-swiper :banner="banner" class="home-swiper"/>
+            <home-swiper :banner="banner" class="home-swiper" @swiperImgLoad='swiperImgLoad' />
             <recommend-view />
-            <feature-view />
-            <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
+            <feature-view @featur='featur' />
+            <tab-contro v-show="!tabControIsShow" ref="tabContro2" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
             <goods-list :goods="goods" :type="type"/>
         </scroll>
         <back-to @click.native="btnClick" v-show="isShow"/> 
@@ -58,12 +59,14 @@
                 keywords: null,
                 sorts: null,
                 goods:{
-                    'pop':{page:0,list:[],Top:0},
-                    'sell':{page:0,list:[],Top:-620},
-                    'new':{page:0,list:[],Top:-620}
+                    'pop':{page:0,list:[],Top:-670},
+                    'sell':{page:0,list:[],Top:-670},
+                    'new':{page:0,list:[],Top:-670}
                 },
                 type:'pop',
-                isShow: false
+                isShow: false,
+                tabControOffsetTop: 0,
+                tabControIsShow:false
             }
         },
         components: {
@@ -106,21 +109,30 @@
                 this.goods[type].page = value.result.wall.page
               })
             },
-            tabContro(sort) {
+            tabContro(sort,index) {
                 this.goods[this.type].Top = this.$refs.scroll.scroll.y
                 this.type = sort
                 this.$refs.scroll.scrollTo(0,this.goods[this.type].Top)
+                this.$refs.tabContro1.curIndex = index
+                this.$refs.tabContro2.curIndex = index
             },
             btnClick() {
                 this.$refs.scroll.scrollTo(0,0,1000)
             },
             // 返回顶部的 显示与隐藏
             block(position) {
-                this.isShow = Math.abs(position.y) > 1000
+                this.isShow = -position.y > 1000
+                this.tabControIsShow = -position.y > this.tabControOffsetTop - 49
             },
             // 下拉请求数据
             upload() {
                 this.getHomegoods(this.type,this.goods[this.type].page)
+            },
+            swiperImgLoad() {
+                this.tabControOffsetTop = this.$refs.tabContro2.$el.offsetTop;
+            },
+            featur() {
+                this.tabControOffsetTop = this.$refs.tabContro2.$el.offsetTop;
             }
         },
         computed: {
@@ -135,8 +147,8 @@
     height: 100vh;
 }
 .nav-bar {
-    position: fixed;
-    top: 0;
+    /* position: fixed;
+    top: 0; */
     min-width: 375px;
     max-width: 600px;
     z-index: 9;
