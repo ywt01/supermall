@@ -20,6 +20,11 @@
                 click: true
             })
             this.scroll = BS
+        },
+        methods: {
+            scrollTo(x,y,time=300) {
+                this.scroll.scrollTo(x,y,time)
+            }
         }
     }
 </script>

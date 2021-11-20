@@ -5,13 +5,14 @@
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
-        <scroll>
+        <scroll ref="scroll">
             <home-swiper :banner="banner" class="home-swiper"/>
             <recommend-view />
             <feature-view />
             <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
             <goods-list :goods="goods" :type="type"/>
-        </scroll> 
+        </scroll>
+        <back-to @click.native="btnClick" /> 
     </div>
 </template>
 
@@ -23,8 +24,10 @@
 //  公共组件
     import NavBar from '../../../common/NavBar/NarBar.vue'
     import TabContro from '../../../common/TabContro/TabContro.vue'
-    import GoodsList from '../../goods/GoodsList.vue'
     import Scroll from '../../../common/BetterScroll/BScroll.vue'
+    // 业务组件
+    import GoodsList from '../../goods/GoodsList.vue'
+    import BackTo from '../../BackTo/BackTo.vue'
 //  数据，功能组件
     import { getHomegoods } from '../../../../network/home.js'
     export default {
@@ -69,6 +72,8 @@
             FeatureView,
             // 业务组件
             GoodsList,
+            BackTo,
+
         },
         created() {
             this.getHomegoods('pop',0)
@@ -99,6 +104,10 @@
                 this.goods[this.type].Top = window.scrollY
                 this.type = sort
                 window.scroll(0,this.goods[this.type].Top)
+            },
+            btnClick() {
+                console.log(1);
+                this.$refs.scroll.scrollTo(0,0,500)
             }
         },
         computed: {
@@ -109,6 +118,7 @@
 
 <style scoped>
 .home {
+    width: 100%;
     height: 100vh;
 }
 .nav-bar {
