@@ -5,14 +5,18 @@
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
-        <scroll ref="scroll" :data='{getHomegoods,type,goods}'>
+        <scroll ref="scroll" 
+        @upload='upload' 
+        @block='block'
+        :probeType='3'
+        :pullUpLoad='true'>
             <home-swiper :banner="banner" class="home-swiper"/>
             <recommend-view />
             <feature-view />
             <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
             <goods-list :goods="goods" :type="type"/>
         </scroll>
-        <back-to @click.native="btnClick" /> 
+        <back-to @click.native="btnClick" v-show="isShow"/> 
     </div>
 </template>
 
@@ -59,6 +63,7 @@
                     'new':{page:0,list:[],Top:-620}
                 },
                 type:'pop',
+                isShow: false
             }
         },
         components: {
@@ -79,7 +84,8 @@
             this.getHomegoods('pop',0)
             this.getHomegoods('sell',0)
             this.getHomegoods('new',0)
-            let that = this
+            // 原生js判断是否到底部
+            // let that = this
             // document.addEventListener('scroll',function(e) {
             //     // pc端和 移动端 兼容
             //     let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
@@ -107,6 +113,14 @@
             },
             btnClick() {
                 this.$refs.scroll.scrollTo(0,0,1000)
+            },
+            // 返回顶部的 显示与隐藏
+            block(position) {
+                this.isShow = Math.abs(position.y) > 1000
+            },
+            // 下拉请求数据
+            upload() {
+                this.getHomegoods(this.type,this.goods[this.type].page)
             }
         },
         computed: {
