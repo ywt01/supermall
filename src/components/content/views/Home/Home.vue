@@ -55,8 +55,8 @@
                 sorts: null,
                 goods:{
                     'pop':{page:0,list:[],Top:0},
-                    'sell':{page:0,list:[],Top:640},
-                    'new':{page:0,list:[],Top:640}
+                    'sell':{page:0,list:[],Top:-620},
+                    'new':{page:0,list:[],Top:-620}
                 },
                 type:'pop',
             }
@@ -101,9 +101,9 @@
               })
             },
             tabContro(sort) {
-                this.goods[this.type].Top = window.scrollY
+                this.goods[this.type].Top = this.$refs.scroll.scroll.y
                 this.type = sort
-                window.scroll(0,this.goods[this.type].Top)
+                this.$refs.scroll.scrollTo(0,this.goods[this.type].Top)
             },
             btnClick() {
                 this.$refs.scroll.scrollTo(0,0,1000)

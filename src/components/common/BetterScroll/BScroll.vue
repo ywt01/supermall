@@ -20,6 +20,7 @@
             BScroll.use(Pulldown)
             let BS = new BScroll(this.$refs.wrapper,{
                 click: true,
+                scrollY: true,
                 observeDOM: true,
                 pullUpLoad: true,
                 pullDownRefresh: true
@@ -27,6 +28,7 @@
             this.scroll = BS
             BS.on('pullingUp',()=> {
                 this.data.getHomegoods(this.data.type,this.data.goods[this.data.type].page)
+                BS.refresh()
                 BS.finishPullUp()
             })
         },
