@@ -12,7 +12,7 @@ const routes = [{
   redirect: '/home'
 }, {
   path: '/home',
-  component: Home
+  component: Home,
 }, {
   path: '/categories',
   component: Categories
@@ -29,5 +29,4 @@ const router = createRouter({
   routes,
   meta:{keepAlive:true},
 })
-
 export default router

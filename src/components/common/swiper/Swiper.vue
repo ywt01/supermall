@@ -131,12 +131,14 @@
             let lastImg = box.children[box.children.length - 1].cloneNode(true)
             box.appendChild(firstImg)
             box.insertBefore(lastImg,box.firstChild)
+        },
+        activated() {
             // 开启定时器滚动图片
             this.timer = this.time();
         },
-        beforeUnmount() {
-            clearInterval(this.timer)
-            this.timer = null;
+        deactivated() {
+            clearTimeout(this.timer)
+            this.timer = null
         },
         components:{
             SwiperItem

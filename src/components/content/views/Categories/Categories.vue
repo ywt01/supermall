@@ -77,7 +77,6 @@
         },
         mounted() {
             this.$nextTick(()=> {
-                console.log(1);
                 let wrapper = document.querySelector('.wrapper')
                 let scroll = new BScroll(wrapper,{
                 click: true

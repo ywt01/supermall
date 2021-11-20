@@ -11,7 +11,7 @@
         @block='block'
         :probeType='3'
         :pullUpLoad='true'>
-            <home-swiper :banner="banner" class="home-swiper" @swiperImgLoad='swiperImgLoad' />
+            <home-swiper ref="homeSwiper" :banner="banner" class="home-swiper" @swiperImgLoad='swiperImgLoad' />
             <recommend-view />
             <feature-view @featur='featur' />
             <tab-contro v-show="!tabControIsShow" ref="tabContro2" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
