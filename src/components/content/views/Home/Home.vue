@@ -1,15 +1,17 @@
 <template>
-    <div>
+    <div class="home">
         <nav-bar class="nav-bar">
             <template #left v-cloak></template>
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
-        <home-swiper :banner="banner" class="home-swiper"/>
-        <recommend-view />
-        <feature-view />
-        <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
-        <goods-list :goods="goods" :type="type"/> 
+        <scroll>
+            <home-swiper :banner="banner" class="home-swiper"/>
+            <recommend-view />
+            <feature-view />
+            <tab-contro :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
+            <goods-list :goods="goods" :type="type"/>
+        </scroll> 
     </div>
 </template>
 
@@ -22,6 +24,7 @@
     import NavBar from '../../../common/NavBar/NarBar.vue'
     import TabContro from '../../../common/TabContro/TabContro.vue'
     import GoodsList from '../../goods/GoodsList.vue'
+    import Scroll from '../../../common/BetterScroll/BScroll.vue'
 //  数据，功能组件
     import { getHomegoods } from '../../../../network/home.js'
     export default {
@@ -58,12 +61,14 @@
         components: {
             // 公共组件
             NavBar,
+            TabContro,
+            Scroll,
             // 子组件
             HomeSwiper,
             RecommendView,
             FeatureView,
-            TabContro,
-            GoodsList
+            // 业务组件
+            GoodsList,
         },
         created() {
             this.getHomegoods('pop',0)
@@ -103,6 +108,9 @@
 </script>
 
 <style scoped>
+.home {
+    height: 100vh;
+}
 .nav-bar {
     position: fixed;
     top: 0;

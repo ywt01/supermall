@@ -27,7 +27,7 @@ const routes = [{
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  meta:{keepAlive:true}
+  meta:{keepAlive:true},
 })
 
 export default router
