@@ -5,7 +5,7 @@
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
-        <scroll ref="scroll">
+        <scroll ref="scroll" :data='{getHomegoods,type,goods}'>
             <home-swiper :banner="banner" class="home-swiper"/>
             <recommend-view />
             <feature-view />
@@ -80,15 +80,15 @@
             this.getHomegoods('sell',0)
             this.getHomegoods('new',0)
             let that = this
-            document.addEventListener('scroll',function(e) {
-                // pc端和 移动端 兼容
-                let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
-                let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
-                let scrollTop = document.documentElement.scrollTop|| document.body.scrollTop
-                if(scrollHeight - clientHeight <= scrollTop) {
-                    that.getHomegoods(that.type,that.goods[that.type].page)
-                }
-            })
+            // document.addEventListener('scroll',function(e) {
+            //     // pc端和 移动端 兼容
+            //     let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+            //     let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+            //     let scrollTop = document.documentElement.scrollTop|| document.body.scrollTop
+            //     if(scrollHeight - clientHeight <= scrollTop) {
+            //         that.getHomegoods(that.type,that.goods[that.type].page)
+            //     }
+            // })
         },
         methods: {
             getHomegoods(type,page) {
