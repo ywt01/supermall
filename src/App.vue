@@ -19,7 +19,4 @@ export default {
 </script>
 <style>
 @import url(./assets/css/base.css);
-#app {
-  height: 100vh;
-}
 </style>

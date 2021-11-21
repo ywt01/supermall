@@ -6,17 +6,12 @@
             <template #right></template>
         </nav-bar>
         <tab-contro v-show="tabControIsShow" ref="tabContro1" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
-        <scroll ref="scroll" 
-        @upload='upload' 
-        @block='block'
-        :probeType='3'
-        :pullUpLoad='true'>
+        
             <home-swiper ref="homeSwiper" :banner="banner" class="home-swiper" @swiperImgLoad='swiperImgLoad' />
             <recommend-view />
             <feature-view @featur='featur' />
             <tab-contro v-show="!tabControIsShow" ref="tabContro2" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
             <goods-list :goods="goods" :type="type"/>
-        </scroll>
         <back-to @click.native="btnClick" v-show="isShow"/> 
     </div>
 </template>
