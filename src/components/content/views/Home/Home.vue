@@ -5,6 +5,7 @@
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
+        <tab-contro v-show="tabControIsShow" ref="tabContro1" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
         <scroll ref="scroll" 
         @upload='upload' 
         @block='block'
