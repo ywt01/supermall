@@ -13,6 +13,7 @@
         :sorts="sorts" 
         @tabContro="tabContro"/>
         <scroll ref="scroll"
+        class="scroll"
         @upload='upload' 
         @block='block'
         :probeType='3'
@@ -159,7 +160,12 @@
     max-width: 600px;
     z-index: 9;
 }
-/* .home-swiper {
+.tabControFiexd {
+    position: sticky;
+    margin-top: 0;
+    top: 44px;
+}
+.scroll {
     margin-top: 44px;
-} */
+}
 </style>
