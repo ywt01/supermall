@@ -5,8 +5,14 @@
             <template #center>购物车</template>
             <template #right></template>
         </nav-bar>
-        <tab-contro v-show="tabControIsShow" ref="tabContro1" :title="['综合','销量','上新']" :sorts="sorts" @tabContro="tabContro"/>
-        <scroll ref="scroll" 
+        <tab-contro
+        class="tabControFiexd" 
+        v-show="tabControIsShow" 
+        ref="tabContro1" 
+        :title="['综合','销量','上新']" 
+        :sorts="sorts" 
+        @tabContro="tabContro"/>
+        <scroll ref="scroll"
         @upload='upload' 
         @block='block'
         :probeType='3'
@@ -122,7 +128,7 @@
             // 返回顶部的 显示与隐藏
             block(position) {
                 this.isShow = -position.y > 1000
-                this.tabControIsShow = -position.y > this.tabControOffsetTop - 49
+                this.tabControIsShow = -position.y > this.tabControOffsetTop - 40
             },
             // 下拉请求数据
             upload() {
@@ -153,7 +159,7 @@
     max-width: 600px;
     z-index: 9;
 }
-.home-swiper {
+/* .home-swiper {
     margin-top: 44px;
-}
+} */
 </style>
