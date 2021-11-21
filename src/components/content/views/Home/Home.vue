@@ -122,7 +122,7 @@
             // 返回顶部的 显示与隐藏
             block(position) {
                 this.isShow = -position.y > 1000
-                this.tabControIsShow = -position.y > 670
+                this.tabControIsShow = -position.y > this.tabControOffsetTop - 49
             },
             // 下拉请求数据
             upload() {
@@ -152,8 +152,5 @@
     min-width: 375px;
     max-width: 600px;
     z-index: 9;
-}
-.home-swiper {
-    margin-top: 44px;
 }
 </style>
