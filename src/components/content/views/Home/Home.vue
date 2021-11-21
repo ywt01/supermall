@@ -147,13 +147,13 @@
     height: 100vh;
 }
 .nav-bar {
-    /* position: fixed;
-    top: 0; */
+    position: fixed;
+    top: 0;
     min-width: 375px;
     max-width: 600px;
     z-index: 9;
 }
-/* .home-swiper {
+.home-swiper {
     margin-top: 44px;
-} */
+}
 </style>
