@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <router-view>
-      
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
     </router-view>
     <main-tar-bar/>
   </div>
@@ -17,4 +19,7 @@ export default {
 </script>
 <style>
 @import url(./assets/css/base.css);
+#app {
+  height: 100vh;
+}
 </style>
