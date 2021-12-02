@@ -2,7 +2,7 @@
     <div class="recommends">
         <div v-for="(item,index) in recommend" :key="index">
             <a :href="item.link">
-                <img :src="item.image" alt="">
+                <img v-lazy="item.image" alt="">
                 <div>{{item.title}}</div>
             </a>
         </div>

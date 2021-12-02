@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <h2>由于接口不足，此页面暂不开发</h2>
         <ul>
             <li>1</li>
             <li>2</li>

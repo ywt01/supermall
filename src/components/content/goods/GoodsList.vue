@@ -2,7 +2,7 @@
     <div class="goodsList">
       <div v-for="(item,index) in goods[type].list" :key="index" class="content">
           <a :href="item.link" class="goodLink">
-              <img :src="item.show.img" alt="">
+              <img v-lazy="item.show.img" alt="">
               <p class="info">{{item.title}}</p>
               <section class="goodsInfo">
                   <span>{{item.price}}</span>
@@ -28,6 +28,14 @@
                 default: 'pop'
             }
         },
+        data() {
+            return {
+                result:null
+            }
+        },
+        methods:{
+
+        }
     }
 </script>
 

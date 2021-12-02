@@ -7,6 +7,8 @@ const Shopcart = () =>
   import ('../components/content/views/Shopcart/Shopcart.vue')
 const Profile = () =>
   import ('../components/content/views/Profile/Profile.vue')
+const Detail = () =>
+  import ('../components/content/views/Detail/Detail.vue')
 const routes = [{
   path: '',
   redirect: '/home'
@@ -22,7 +24,11 @@ const routes = [{
 }, {
   path: '/profile',
   component: Profile
-}, ]
+}, 
+{
+  path:'/Detail/:iid',
+  component: Detail
+}]
 
 const router = createRouter({
   history: createWebHashHistory(),

@@ -26,6 +26,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 a {
