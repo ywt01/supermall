@@ -31,7 +31,7 @@ const routes = [{
 }]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   meta:{keepAlive:true},
 })

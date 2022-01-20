@@ -152,12 +152,14 @@
 .home {
     width: 100%;
     height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
 }
 .nav-bar {
     position: fixed;
     top: 0;
     min-width: 375px;
-    max-width: 600px;
+    max-width: 500px;
     z-index: 9;
 }
 .tabControFiexd {
